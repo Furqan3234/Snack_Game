@@ -7,6 +7,7 @@ ALIGNMENT = "center"
 FONT = ("Courier", 24, "bold")
 
 class Scoreboard(Turtle):
+    """Class to manage score and high score display."""
     def __init__(self):
         super().__init__()
         self.score = 0
@@ -20,6 +21,7 @@ class Scoreboard(Turtle):
         self.update_scoreboard()
 
     def load_high_scores(self):
+        """Loads high scores from a file."""
         try:
             script_dir = os.path.dirname(os.path.abspath(__file__))
             data_path = os.path.join(script_dir, "data.txt")
@@ -42,6 +44,7 @@ class Scoreboard(Turtle):
             return {"Classic": 0, "Obstacle": 0}
 
     def save_high_score(self):
+        """Saves current high score to a file."""
         try:
             self.high_scores[self.current_mode] = self.high_score
             script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -57,6 +60,7 @@ class Scoreboard(Turtle):
         self.update_scoreboard()
 
     def update_scoreboard(self):
+        """Refresh the score display."""
         self.clear()
         self.write(f"Score: {self.score} High Score: {self.high_score}", align=ALIGNMENT, font=FONT)
 

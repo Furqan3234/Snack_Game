@@ -2,6 +2,7 @@ from turtle import Turtle
 import random
 
 class GameMode:
+    """Base class for different game modes."""
     def __init__(self, width, height):
         self.width = width
         self.height = height
@@ -39,6 +40,9 @@ class GameMode:
                 self._add_obstacle(c1, y, color)
 
 class ClassicMode(GameMode):
+    """
+    Classic Mode: Walls around the border with wrap-around effect.
+    """
     def setup(self):
         self.clear()
         # "Classic Walls" - Long, uniform grey walls at the edges
@@ -86,6 +90,9 @@ class ClassicMode(GameMode):
         return False
 
 class ObstacleMode(GameMode):
+    """
+    Obstacle Mode: Walls appear inside the map and change every few levels.
+    """
     def setup(self):
         # Initial setup uses level 1 layout
         self.generate_obstacles(1, [])

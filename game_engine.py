@@ -16,6 +16,10 @@ except ImportError:
     SOUND_AVAILABLE = False
 
 class Game:
+    """
+    The main game class that manages the screen, game loop, and game elements.
+    It coordinates the Snake, Food, Scoreboard, and Game Modes.
+    """
     def __init__(self):
         self.screen = Screen()
         self.screen.setup(width=680, height=720)
@@ -26,6 +30,7 @@ class Game:
         self.width = 680
         self.height = 720
         
+        # Dictionary of available game modes
         self.modes = {
             "Classic": ClassicMode(self.width, self.height),
             "Obstacle": ObstacleMode(self.width, self.height)
@@ -33,6 +38,7 @@ class Game:
         self.current_mode_name = "Classic"
         self.mode = self.modes[self.current_mode_name]
 
+        # Initialize game objects: Snake, Food, Bonus Food, Scoreboard
         self.snake = Snake()
         self.food = Food()
         self.bonus_food = BonusFood()
@@ -78,8 +84,11 @@ class Game:
         self.menu_pen.hideturtle()
         self.menu_pen.penup()
         
+        # Set up initial state
         self.hide_game_objects()
         self.show_menu()
+        
+        # Listen for mouse clicks on the screen
         self.screen.onscreenclick(self.handle_click)
 
     def hide_game_objects(self):
@@ -97,6 +106,7 @@ class Game:
         self.particles.clear()
 
     def _bind_keys(self):
+        """Set up keyboard bindings for controlling the snake."""
         self.screen.listen()
         self.screen.onkey(self.snake.up, "Up")
         self.screen.onkey(self.snake.down, "Down")
@@ -120,6 +130,7 @@ class Game:
             self.show_menu()
 
     def show_menu(self):
+        """Displays the main menu with Start Game, Mode selection, etc."""
         if self.is_running:
             return
             
@@ -204,6 +215,7 @@ class Game:
             self.set_mode("Obstacle")
 
     def start_game(self):
+        """Initializes game state and starts the game loop."""
         if self.is_running:
             return
             
@@ -243,6 +255,7 @@ class Game:
         return base_delay
 
     def level_up(self):
+        """Increases the level, speeds up the game, and changes snake color."""
         self.level += 1
         
         # Regenerate obstacles if in Obstacle Mode
@@ -295,6 +308,7 @@ class Game:
                 self.particles.remove(p)
 
     def game_loop(self):
+        """The main game loop. Moves the snake, checks collisions, and updates the screen."""
         if not self.is_running:
             return
 

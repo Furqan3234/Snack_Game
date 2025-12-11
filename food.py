@@ -4,6 +4,7 @@ import time
 import math
 
 class Food(Turtle):
+    """Class representing the regular food."""
     def __init__(self):
         super().__init__()
         self.shape("circle")
@@ -15,6 +16,7 @@ class Food(Turtle):
         self.refresh()
 
     def refresh(self, obstacles=None):
+        """Moves the food to a random position not occupied by obstacles."""
         if obstacles is not None:
             self.obstacles_list = obstacles
         
@@ -39,6 +41,7 @@ class Food(Turtle):
         self.goto(random_x, random_y)
 
 class BonusFood(Turtle):
+    """Class representing temporary bonus food (Golden Apple)."""
     def __init__(self):
         super().__init__()
         self.shape("circle")

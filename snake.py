@@ -4,6 +4,7 @@ STARTING_POSITIONS = [(0,0), (-20,0), (-40,0)]
 MOVE_DISTANCE = 20
 
 class Snake:
+    """Class respresenting the snake, its movement, and growth."""
     def __init__(self):
         self.body_color = "white"
         self.segments = []
@@ -11,6 +12,7 @@ class Snake:
         self.head = self.segments[0]
 
     def create_snake(self):
+        """Creates the initial snake body."""
         for position in STARTING_POSITIONS:
             self.add_segment(position)
         self.head = self.segments[0]
@@ -53,6 +55,7 @@ class Snake:
         self.can_turn = True
 
     def move(self):
+        """Moves the snake forward by one step."""
         for seg_num in range(len(self.segments) - 1, 0, -1):
             new_x = self.segments[seg_num - 1].xcor()
             new_y = self.segments[seg_num - 1].ycor()
@@ -82,4 +85,5 @@ class Snake:
             self.can_turn = False
 
     def extend(self):
+        """Adds a new segment to the snake."""
         self.add_segment(self.segments[-1].position())
